@@ -1,0 +1,10 @@
+.personal-info {
+  text-align: center;
+  padding: 8px;
+}
+
+li {
+  list-style: none;
+  border-bottom: 1px solid grey;
+  padding: 8px;
+}
