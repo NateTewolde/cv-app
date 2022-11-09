@@ -17,10 +17,22 @@ class EducationForm extends Component {
           id={`eduSchoolInput${this.props.eduNum}`}
           defaultValue={this.props.eduSchoolEntry}
         />
+
         <label htmlFor="education">Study</label>
-        <input type="text" id="eduTitleInput" />
+        <input
+          onBlur={this.props.handleChange}
+          type="text"
+          id={`eduTitleInput${this.props.eduNum}`}
+          defaultValue={this.props.eduTitleEntry}
+        />
+
         <label htmlFor="education">Date</label>
-        <input type="date" id="eduDateInput" />
+        <input
+          onBlur={this.props.handleChange}
+          type="date"
+          id={`eduDateInput${this.props.eduNum}`}
+          defaultValue={this.props.eduDateEntry}
+        />
       </div>
     );
   }
