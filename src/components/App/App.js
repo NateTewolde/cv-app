@@ -20,6 +20,8 @@ class App extends Component {
       cell: { change: "555-555-5555", id: uniqid() },
       eduFormCount: 1,
       eduSchoolInput1: { value: "", change: "", id: uniqid() },
+      eduTitleInput1: { value: "", change: "", id: uniqid() },
+      eduDateInput1: { value: "", change: "", id: uniqid() },
     };
   }
 
@@ -33,6 +35,16 @@ class App extends Component {
     e.preventDefault();
     this.setState({
       [`eduSchoolInput${this.state.eduFormCount + 1}`]: {
+        value: "",
+        change: "",
+        id: uniqid(),
+      },
+      [`eduTitleInput${this.state.eduFormCount + 1}`]: {
+        value: "",
+        change: "",
+        id: uniqid(),
+      },
+      [`eduDateInput${this.state.eduFormCount + 1}`]: {
         value: "",
         change: "",
         id: uniqid(),
@@ -71,11 +83,17 @@ class App extends Component {
         <EducationForm
           eduNum={i}
           eduSchoolEntry={this.state[`eduSchoolInput${i}`].change}
+          eduTitleEntry={this.state[`eduTitleInput${i}`].change}
+          eduDateEntry={this.state[`eduDateInput${i}`].change}
           handleChange={this.handleChange}
           key={uniqid()}
         />
       );
-      educationData.push(this.state[`eduSchoolInput${i}`].value);
+      educationData.push(
+        `${this.state[`eduSchoolInput${i}`].value || ""} ${
+          this.state[`eduTitleInput${i}`].value || ""
+        } ${this.state[`eduDateInput${i}`].value || ""}`
+      );
     }
     return (
       <div className="wrapper">
