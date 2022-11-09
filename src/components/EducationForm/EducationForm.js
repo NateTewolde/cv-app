@@ -7,21 +7,22 @@ class EducationForm extends Component {
     this.props = props;
   }
 
-  getEducationForm = () => {
+  render() {
     return (
       <div key={uniqid()}>
-        <label htmlFor="education">School/Training</label>
-        <input onChange={this.handleChange} type="text" id="education-input" />
+        <label htmlFor="education">School</label>
+        <input
+          onBlur={this.props.handleChange}
+          type="text"
+          id={`eduSchoolInput${this.props.eduNum}`}
+          defaultValue={this.props.eduSchoolEntry}
+        />
+        <label htmlFor="education">Study</label>
+        <input type="text" id="eduTitleInput" />
+        <label htmlFor="education">Date</label>
+        <input type="date" id="eduDateInput" />
       </div>
     );
-  };
-
-  render() {
-    const educationForms = [];
-    for (let i = 0; i < this.props.eduFormCount; i++) {
-      educationForms.push(this.getEducationForm());
-    }
-    return <div className="education-form-section">{educationForms}</div>;
   }
 }
 

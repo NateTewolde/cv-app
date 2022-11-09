@@ -1,4 +1,5 @@
-.personal-info {
+.personal-info,
+.education-info {
   text-align: center;
   padding: 8px;
 }

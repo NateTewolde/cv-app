@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
 import "./App.css";
-import Overview from "../Overview/Overview";
 import EducationForm from "../EducationForm/EducationForm";
+import { PersonalInfo, Education } from "../Overview/Overview";
 
 const fields = [
   { field: "name", type: "text", id: uniqid() },
@@ -15,10 +15,11 @@ class App extends Component {
     super();
 
     this.state = {
-      name: { value: "", change: "", id: uniqid() },
-      email: { value: "", change: "", id: uniqid() },
-      cell: { value: "", change: "", id: uniqid() },
-      eduFormCount: 2,
+      name: { change: "Nate T", id: uniqid() },
+      email: { change: "email@myemail.com", id: uniqid() },
+      cell: { change: "555-555-5555", id: uniqid() },
+      eduFormCount: 1,
+      eduSchoolInput1: { value: "", change: "", id: uniqid() },
     };
   }
 
@@ -31,25 +32,51 @@ class App extends Component {
   onAddMore = (e) => {
     e.preventDefault();
     this.setState({
+      [`eduSchoolInput${this.state.eduFormCount + 1}`]: {
+        value: "",
+        change: "",
+        id: uniqid(),
+      },
       eduFormCount: this.state.eduFormCount + 1,
     });
   };
 
   onSubmitForm = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    fields.map((field) =>
+
+    for (const state in this.state) {
+      if (state === `eduFormCount`) {
+        this.setState({
+          eduFormCount: this.state.eduFormCount,
+        });
+        continue;
+      }
       this.setState({
-        [field.field]: {
-          value: this.state[field.field].change,
+        [state]: {
+          value: this.state[state].change,
           id: uniqid(),
         },
-      })
-    );
+      });
+    }
+    console.log(this.state);
   };
 
   render() {
     const { name, email, cell, eduFormCount } = this.state;
+
+    const educationForms = [];
+    const educationData = [];
+    for (let i = 1; i < eduFormCount + 1; i++) {
+      educationForms.push(
+        <EducationForm
+          eduNum={i}
+          eduSchoolEntry={this.state[`eduSchoolInput${i}`].change}
+          handleChange={this.handleChange}
+          key={uniqid()}
+        />
+      );
+      educationData.push(this.state[`eduSchoolInput${i}`].value);
+    }
     return (
       <div className="wrapper">
         <form onSubmit={this.onSubmitForm}>
@@ -62,15 +89,17 @@ class App extends Component {
                 onChange={this.handleChange}
                 type={field.type}
                 id={field.field}
+                defaultValue={this.state[field.field].change}
                 required
               />
             </div>
           ))}
-          <EducationForm eduFormCount={eduFormCount} />
+          <div className="education-form-section">{educationForms}</div>;
           <button onClick={this.onAddMore}>Add More</button>
           <button type="submit">Submit</button>
         </form>
-        <Overview fields={fields} name={name} email={email} cell={cell} />
+        <PersonalInfo fields={fields} name={name} email={email} cell={cell} />
+        <Education eduFormCount={eduFormCount} educationData={educationData} />
       </div>
     );
   }
