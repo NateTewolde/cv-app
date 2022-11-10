@@ -11,7 +11,7 @@ class PersonalInfo extends Component {
   render() {
     return (
       <div className="personal-info">
-        <h1>Personal Information</h1>
+        <h2>Personal Information</h2>
         <ul>
           {this.props.fields.map((field) => {
             return (
@@ -40,11 +40,32 @@ class Education extends Component {
 
     return (
       <div className="education-info">
-        <h1>Education</h1>
+        <h2>Education</h2>
         <ul>{eduInputs}</ul>
       </div>
     );
   }
 }
 
-export { PersonalInfo, Education };
+class Work extends Component {
+  constructor(props) {
+    super();
+
+    this.props = props;
+  }
+  render() {
+    const workInputs = [];
+    for (let i = 0; i < this.props.workData.length; i++) {
+      workInputs.push(<li key={uniqid()}>{this.props.workData[i]}</li>);
+    }
+
+    return (
+      <div className="work-info">
+        <h2>Work</h2>
+        <ul>{workInputs}</ul>
+      </div>
+    );
+  }
+}
+
+export { PersonalInfo, Education, Work };

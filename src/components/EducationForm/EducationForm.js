@@ -10,7 +10,7 @@ class EducationForm extends Component {
   render() {
     return (
       <div key={uniqid()}>
-        <label htmlFor="education">School</label>
+        <label htmlFor="education">School:</label>
         <input
           onBlur={this.props.handleChange}
           type="text"
@@ -18,7 +18,7 @@ class EducationForm extends Component {
           defaultValue={this.props.eduSchoolEntry}
         />
 
-        <label htmlFor="education">Study</label>
+        <label htmlFor="education">Study:</label>
         <input
           onBlur={this.props.handleChange}
           type="text"
@@ -26,7 +26,7 @@ class EducationForm extends Component {
           defaultValue={this.props.eduTitleEntry}
         />
 
-        <label htmlFor="education">Date</label>
+        <label htmlFor="education">Date:</label>
         <input
           onBlur={this.props.handleChange}
           type="date"
