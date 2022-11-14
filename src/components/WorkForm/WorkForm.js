@@ -1,7 +1,7 @@
 import React from "react";
 import uniqid from "uniqid";
 
-function WorkForm({
+const WorkForm = ({
   workNum,
   workNameEntry,
   workTitleEntry,
@@ -9,7 +9,7 @@ function WorkForm({
   workStartDateEntry,
   workEndDateEntry,
   handleChange,
-}) {
+}) => {
   return (
     <div key={uniqid()}>
       <label htmlFor="work">Company:</label>
@@ -53,6 +53,6 @@ function WorkForm({
       />
     </div>
   );
-}
+};
 
 export default WorkForm;
