@@ -1,57 +1,58 @@
-import React, { Component } from "react";
+import React from "react";
 import uniqid from "uniqid";
 
-class WorkForm extends Component {
-  constructor(props) {
-    super();
-    this.props = props;
-  }
+function WorkForm({
+  workNum,
+  workNameEntry,
+  workTitleEntry,
+  workTasksEntry,
+  workStartDateEntry,
+  workEndDateEntry,
+  handleChange,
+}) {
+  return (
+    <div key={uniqid()}>
+      <label htmlFor="work">Company:</label>
+      <input
+        onBlur={handleChange}
+        type="text"
+        id={`workNameInput${workNum}`}
+        defaultValue={workNameEntry}
+      />
 
-  render() {
-    return (
-      <div key={uniqid()}>
-        <label htmlFor="work">Company:</label>
-        <input
-          onBlur={this.props.handleChange}
-          type="text"
-          id={`workNameInput${this.props.workNum}`}
-          defaultValue={this.props.workNameEntry}
-        />
+      <label htmlFor="work">Title:</label>
+      <input
+        onBlur={handleChange}
+        type="text"
+        id={`workTitleInput${workNum}`}
+        defaultValue={workTitleEntry}
+      />
 
-        <label htmlFor="work">Title:</label>
-        <input
-          onBlur={this.props.handleChange}
-          type="text"
-          id={`workTitleInput${this.props.workNum}`}
-          defaultValue={this.props.workTitleEntry}
-        />
+      <label htmlFor="work">Tasks:</label>
+      <input
+        onBlur={handleChange}
+        type="text"
+        id={`workTasksInput${workNum}`}
+        defaultValue={workTasksEntry}
+      />
 
-        <label htmlFor="work">Tasks:</label>
-        <input
-          onBlur={this.props.handleChange}
-          type="text"
-          id={`workTasksInput${this.props.workNum}`}
-          defaultValue={this.props.workTasksEntry}
-        />
+      <label htmlFor="work">Start Date:</label>
+      <input
+        onBlur={handleChange}
+        type="date"
+        id={`workStartDateInput${workNum}`}
+        defaultValue={workStartDateEntry}
+      />
 
-        <label htmlFor="work">Start Date:</label>
-        <input
-          onBlur={this.props.handleChange}
-          type="date"
-          id={`workStartDateInput${this.props.workNum}`}
-          defaultValue={this.props.workStartDateEntry}
-        />
-
-        <label htmlFor="work">End Date:</label>
-        <input
-          onBlur={this.props.handleChange}
-          type="date"
-          id={`workEndDateInput${this.props.workNum}`}
-          defaultValue={this.props.workEndDateEntry}
-        />
-      </div>
-    );
-  }
+      <label htmlFor="work">End Date:</label>
+      <input
+        onBlur={handleChange}
+        type="date"
+        id={`workEndDateInput${workNum}`}
+        defaultValue={workEndDateEntry}
+      />
+    </div>
+  );
 }
 
 export default WorkForm;
