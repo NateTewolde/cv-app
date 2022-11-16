@@ -16,9 +16,9 @@ class App extends Component {
     super();
 
     this.state = {
-      name: { change: "", id: uniqid() },
-      email: { change: "", id: uniqid() },
-      cell: { change: "", id: uniqid() },
+      name: { change: "pp head", id: uniqid() },
+      email: { change: "email@email.com", id: uniqid() },
+      cell: { change: "555-555-5555", id: uniqid() },
       eduFormCount: 1,
       eduSchoolInput1: { value: "", change: "", id: uniqid() },
       eduTitleInput1: { value: "", change: "", id: uniqid() },
@@ -34,7 +34,11 @@ class App extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.id]: { change: e.target.value, id: uniqid() },
+      [e.target.id]: {
+        value: this.state[e.target.id].value,
+        change: e.target.value,
+        id: uniqid(),
+      },
     });
   };
 
@@ -219,9 +223,9 @@ class App extends Component {
             <button type="submit">Submit</button>
           </div>
         </form>
-        <PersonalInfo fields={fields} name={name} email={email} cell={cell} />
-        <Education eduFormCount={eduFormCount} educationData={educationData} />
-        <Work workFormCount={workFormCount} workData={workData} />
+        <PersonalInfo name={name} email={email} cell={cell} />
+        <Education educationData={educationData} />
+        <Work workData={workData} />
         <div className="edit-btn">
           <button onClick={this.onEdit}>Edit</button>
         </div>
