@@ -1,71 +1,62 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "./Overview.css";
 import uniqid from "uniqid";
 
-class PersonalInfo extends Component {
-  constructor(props) {
-    super();
+const PersonalInfo = ({ name, email, cell }) => {
+  const [personalInputs, setPersonalInputs] = useState([]);
 
-    this.props = props;
-  }
-  render() {
-    return (
-      <div className="personal-info">
-        <h2>Personal Information</h2>
-        <ul>
-          {this.props.fields.map((field) => {
-            return (
-              <li key={this.props[field.field].id}>
-                {this.props[field.field].value}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    const personalInputsTracker = [];
 
-class Education extends Component {
-  constructor(props) {
-    super();
+    personalInputsTracker.push(<li key={uniqid()}>{name.value}</li>);
+    personalInputsTracker.push(<li key={uniqid()}>{email.value}</li>);
+    personalInputsTracker.push(<li key={uniqid()}>{cell.value}</li>);
+    setPersonalInputs(personalInputsTracker);
+  }, [name.value, email.value, cell.value]);
 
-    this.props = props;
-  }
-  render() {
-    const eduInputs = [];
-    for (let i = 0; i < this.props.educationData.length; i++) {
-      eduInputs.push(<li key={uniqid()}>{this.props.educationData[i]}</li>);
+  return (
+    <div className="personal-info">
+      <h2>Personal Information</h2>
+      <ul>{personalInputs}</ul>
+    </div>
+  );
+};
+
+const Education = ({ educationData }) => {
+  const [eduInputs, setEduInputs] = useState([]);
+
+  useEffect(() => {
+    const eduInputsTracker = [];
+    for (let i = 0; i < educationData.length; i++) {
+      eduInputsTracker.push(<li key={uniqid()}>{educationData[i]}</li>);
     }
+    setEduInputs(eduInputsTracker);
+  }, [educationData]);
 
-    return (
-      <div className="education-info">
-        <h2>Education</h2>
-        <ul>{eduInputs}</ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="education-info">
+      <h2>Education</h2>
+      <ul>{eduInputs}</ul>
+    </div>
+  );
+};
 
-class Work extends Component {
-  constructor(props) {
-    super();
-
-    this.props = props;
-  }
-  render() {
-    const workInputs = [];
-    for (let i = 0; i < this.props.workData.length; i++) {
-      workInputs.push(<li key={uniqid()}>{this.props.workData[i]}</li>);
+const Work = ({ workData }) => {
+  const [workInputs, setWorkInputs] = useState([]);
+  useEffect(() => {
+    const workInputsTracker = [];
+    for (let i = 0; i < workData.length; i++) {
+      workInputsTracker.push(<li key={uniqid()}>{workData[i]}</li>);
     }
+    setWorkInputs(workInputsTracker);
+  }, [workData]);
 
-    return (
-      <div className="work-info">
-        <h2>Work</h2>
-        <ul>{workInputs}</ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="work-info">
+      <h2>Work</h2>
+      <ul>{workInputs}</ul>
+    </div>
+  );
+};
 
 export { PersonalInfo, Education, Work };
